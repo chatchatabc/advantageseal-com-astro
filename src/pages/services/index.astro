@@ -1,0 +1,47 @@
+---
+import LayoutCategory from "@layouts/LayoutCategory.astro";
+import servicesJson from "@data/services.json";
+import { Picture } from "astro-imagetools/components";
+---
+
+<LayoutCategory
+  pageTitle={servicesJson.pageTitle}
+  title="Services"
+  image="/images/services/banner.webp"
+  pageDescription={servicesJson.pageDescription}
+  pageKeywords={servicesJson.pageKeywords}
+  ogTitle={servicesJson.ogTitle ?? servicesJson.pageTitle}
+  ogDescription={servicesJson.ogDescription ?? servicesJson.pageDescription}
+  ogImage={servicesJson.ogImage}
+  ogType={servicesJson.ogType}
+  twitterCardType={servicesJson.twitterCardType}
+  twitterTitle={servicesJson.twitterTitle}
+  twitterDescription={servicesJson.twitterDescription}
+  twitterImage={servicesJson.twitterImage}
+>
+  <!--  max-w-7xl -->
+  <section class="mx-auto py-16 space-y-16 max-w-7xl px-4 lg:px-8">
+    {
+      servicesJson.contents.map((service) => {
+        return (
+          <section>
+            <div id={service.slug} class="-translate-y-32" />
+            <figure class="flex flex-wrap">
+              <div class="px-16 py-8 shadow-xl w-3/4 mx-auto md:w-1/2 lg:w-1/3">
+                <Picture src={service.imageUrl} alt={service.name} />
+              </div>
+
+              <figcaption class="flex flex-col mt-8 justify-center w-full lg:px-16 lg:mt-0 lg:w-2/3">
+                <header>
+                  <h2 class="text-5xl">{service.name}</h2>
+                </header>
+                <div class="h-1 w-1/4 bg-[#E14753] my-8" />
+                <p class="text-lg">{service.summary}</p>
+              </figcaption>
+            </figure>
+          </section>
+        );
+      })
+    }
+  </section>
+</LayoutCategory>

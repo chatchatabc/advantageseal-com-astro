@@ -1,0 +1,158 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon";
+import { Picture } from "astro-imagetools/components";
+
+const productCategories = await getCollection(
+  "product-categories",
+  (product) => product.data.isFeatured
+);
+---
+
+<hero-section is="section" class="relative block group overflow-hidden">
+  <!-- Background -->
+  <div
+    id="hero-bg"
+    class="absolute h-full w-full z-[-2] left-0 bottom-24 bg-[#DCECF9]"
+  >
+  </div>
+
+  <!-- Content -->
+  <section
+    class="relative max-w-7xl flex items-center h-full mx-auto px-4 lg:px-8"
+  >
+    <button
+      id="hero-prev-btn"
+      class="p-1 rounded-full transition bg-black bg-opacity-20 lg:opacity-0 group-hover:opacity-100"
+      aria-label="Previous Button"
+    >
+      <Icon class="h-4 w-4 lg:h-8 lg:w-8" name="mdi:chevron-left" />
+    </button>
+
+    <!-- Carousel -->
+    <ul
+      class="flex-1 relative max-h-[600px] h-[70vh] overflow-visible md:h-[70vh] md:px-32"
+    >
+      {
+        productCategories.map(async (product) => {
+          const { slug } = product;
+          const { name, imageUrl } = product.data;
+          const { Content } = await product.render();
+          return (
+            <li>
+              <figure class="items px-4 duration-300 opacity-0 pointer-events-none translate-x-1/2 absolute left-0 top-0 right-0 h-full w-full flex flex-col justify-center md:px-8">
+                <figcaption class="-translate-y-1/4 md:w-2/3">
+                  <header>
+                    <h3 class="-mb-4 py-2 text-3xl lg:mb-0 lg:text-4xl">
+                      {name}
+                    </h3>
+                  </header>
+                  <section class="markdown text-base lg:text-lg">
+                    <Content />
+                  </section>
+                  <a
+                    href={`/products/${slug}`}
+                    class="inline-block bg-primary text-white mt-8 px-8 py-2 transition hover:bg-background"
+                  >
+                    View More
+                  </a>
+                </figcaption>
+                <div class="images delay-300 duration-500 opacity-0 absolute right-0 bottom-1/2 z-[-1] h-1/3 translate-y-full md:translate-y-1/2 md:h-2/3">
+                  <Picture
+                    preload={"webp"}
+                    breakpoints={[320, 480]}
+                    src={imageUrl}
+                    alt={name}
+                  />
+                </div>
+              </figure>
+            </li>
+          );
+        })
+      }
+    </ul>
+    <button
+      id="hero-next-btn"
+      class="p-1 rounded-full transition bg-black bg-opacity-20 lg:opacity-0 group-hover:opacity-100"
+      aria-label="Next Button"
+    >
+      <Icon class="h-4 w-4 lg:h-8 lg:w-8" name="mdi:chevron-right" />
+    </button>
+  </section>
+</hero-section>
+
+<script>
+  class HeroSection extends HTMLElement {
+    constructor() {
+      super();
+      const items = this.querySelectorAll(".items")!;
+      const prevBtn = this.querySelector("#hero-prev-btn")!;
+      const nextBtn = this.querySelector("#hero-next-btn")!;
+      const images = this.querySelectorAll(".images")!;
+      let index = 0;
+      let timer: any;
+
+      // Event Listeners
+      prevBtn.addEventListener("click", () => {
+        index--;
+        if (index < 0) {
+          index = items.length - 1;
+        }
+        resetTimer();
+        updateSlide();
+      });
+      nextBtn.addEventListener("click", () => {
+        index++;
+        if (index > items.length - 1) {
+          index = 0;
+        }
+        resetTimer();
+        updateSlide();
+      });
+
+      // Functions
+      function updateSlide() {
+        items.forEach((item) => {
+          item.classList.add("opacity-0");
+          item.classList.add("pointer-events-none");
+          item.classList.add("translate-x-1/2");
+        });
+        images.forEach((image) => {
+          image.classList.add("opacity-0");
+        });
+
+        setTimeout(() => {
+          images[index].classList.remove("opacity-0");
+          items[index].classList.remove("opacity-0");
+          items[index].classList.remove("pointer-events-none");
+          items[index].classList.remove("translate-x-1/2");
+        }, 300);
+      }
+      function resetTimer() {
+        if (timer) {
+          clearInterval(timer);
+        }
+        timer = setInterval(() => {
+          index++;
+          if (index > items.length - 1) {
+            index = 0;
+          }
+          updateSlide();
+        }, 5000);
+      }
+
+      // Starting Script
+      resetTimer();
+      updateSlide();
+    }
+  }
+
+  customElements.define("hero-section", HeroSection);
+</script>
+
+<style is:global>
+  #hero-bg {
+    -webkit-clip-path: ellipse(49% 16% at 50% 50%);
+    clip-path: ellipse(100% 50% at 75% 50%);
+  }
+</style>

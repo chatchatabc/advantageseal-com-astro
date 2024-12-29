@@ -1,0 +1,29 @@
+{
+  "pageTitle": "Contact Us | Advantage Seals",
+  "pageDescription": "694 Veterans Pkwy, Bolingbrook, IL 60440, United States, Send an email on info@advantageseal.com, Call us on +1 (630) 226-0200.",
+  "pageKeywords": "Contact Us, Advantage Seal",
+  "ogTitle": null,
+  "ogImage": null,
+  "ogType": null,
+  "ogDescription": null,
+  "twitterCardType": null,
+  "twitterTitle": null,
+  "twitterDescription": null,
+  "twitterImage": null,
+  "contents": [
+    {
+      "type": "email",
+      "name": "info@advantageseal.com",
+      "href": "mailto:info@advantageseal.com",
+      "message": "Send Email",
+      "icon": "ic:round-mail-outline"
+    },
+    {
+      "type": "phone",
+      "name": "+1 (630) 226-0200",
+      "href": "tel:+16302260200",
+      "message": "Call Us",
+      "icon": "ic:baseline-local-phone"
+    }
+  ]
+}

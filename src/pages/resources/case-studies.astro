@@ -1,0 +1,99 @@
+---
+import LayoutCategory from "@layouts/LayoutCategory.astro";
+import { Icon } from "astro-icon";
+import caseStudiesJson from "@data/case-studies.json";
+---
+
+<LayoutCategory
+  image="/images/resources/banner.webp"
+  title="Case Studies"
+  pageTitle={caseStudiesJson.pageTitle}
+  pageDescription={caseStudiesJson.pageDescription}
+  pageKeywords={caseStudiesJson.pageKeywords}
+  ogTitle={caseStudiesJson.ogTitle ?? caseStudiesJson.pageTitle}
+  ogDescription={caseStudiesJson.ogDescription ??
+    caseStudiesJson.pageDescription}
+  ogImage={caseStudiesJson.ogImage}
+  ogType={caseStudiesJson.ogType}
+  twitterCardType={caseStudiesJson.twitterCardType}
+  twitterTitle={caseStudiesJson.twitterTitle}
+  twitterDescription={caseStudiesJson.twitterDescription}
+  twitterImage={caseStudiesJson.twitterImage}
+>
+  <!-- Introduction -->
+  <section class="max-w-7xl mx-auto px-4 pt-4 lg:pt-16 lg:px-8">
+    <p class="text-lg">
+      Advantage Seal(Ningbo) co., ltd has been committed to the "create value
+      for customers" business philosophy, adhering to the "product is designed"
+      policy, solve production problems and difficulties for customers, provide
+      better service for customers, so as to maximize the interests of
+      customers.
+    </p>
+  </section>
+
+  <!-- Quote -->
+  <section class="max-w-7xl pt-8 mx-auto px-4 lg:px-8">
+    <div>
+      <Icon class="w-20 h-20 text-primary" name="bi:quote" />
+    </div>
+    <blockquote class="text-lg px-4 lg:px-24">
+      <p>
+        In April 2012, pump company in the United States reported that there
+        were the following problems in the use of ordinary reactive sintered
+        silicon carbide materials (all of which are this material) in the
+        lab-level deionized water for our type 21 5/8 'mechanical seal:
+      </p>
+      <ul class="pt-4">
+        {
+          caseStudiesJson.quotes.map((quote, index) => {
+            return (
+              <li>
+                <p>
+                  {index + 1}. {quote}
+                </p>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </blockquote>
+    <div class="flex justify-end">
+      <Icon class="w-20 h-20 text-primary rotate-180" name="bi:quote" />
+    </div>
+  </section>
+
+  <section class="max-w-7xl pt-8 mx-auto px-4 lg:px-8">
+    <article
+      class="py-8 bg-background1 rounded-xl overflow-hidden px-4 lg:px-24"
+    >
+      <header>
+        <h2 class="font-bold text-3xl">
+          Our company readjusted the design scheme according to the customer
+          feedback, and made the following adjustments:
+        </h2>
+      </header>
+      <ul class="text-lg py-4">
+        {
+          caseStudiesJson.objectives.map((objective, index) => {
+            return (
+              <li>
+                <p>
+                  {index + 1}. {objective}
+                </p>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </article>
+  </section>
+
+  <section class="max-w-7xl pt-8 mx-auto px-4 pb-4 lg:px-8 lg:pb-16">
+    <p class="text-lg">
+      The service life of the mechanical seal is greatly extended after the end
+      surface suction problem is improved. Now this mechanical seal has been
+      used in the customer's water pump for more than 3 years without any
+      problems.
+    </p>
+  </section>
+</LayoutCategory>

@@ -1,0 +1,77 @@
+---
+import ProductSearch from "@components/widgets/ProductSearch.astro";
+import LayoutCategory from "@layouts/LayoutCategory.astro";
+import industriesJson from "@data/industries.json";
+
+const industries = [...industriesJson.contents];
+---
+
+<LayoutCategory
+  image="/images/industries/banner.webp"
+  title="Industries"
+  pageTitle={industriesJson.pageTitle}
+  pageDescription={industriesJson.pageDescription}
+  pageKeywords={industriesJson.pageKeywords}
+  ogTitle={industriesJson.ogTitle ?? industriesJson.pageTitle}
+  ogDescription={industriesJson.ogDescription ?? industriesJson.pageDescription}
+  ogImage={industriesJson.ogImage}
+  ogType={industriesJson.ogType}
+  twitterCardType={industriesJson.twitterCardType}
+  twitterTitle={industriesJson.twitterTitle}
+  twitterDescription={industriesJson.twitterDescription}
+  twitterImage={industriesJson.twitterImage}
+>
+  <!-- Container -->
+  <section class="max-w-7xl mx-auto px-4 lg:px-8">
+    <!-- Summary -->
+    <section>
+      <p class="text-xl py-8 lg:py-16">
+        Advantage Seal has extensive experience in the food and beverage
+        industries. We understand the industry's diverse sealing requirements
+        and are committed to assisting our clients in remaining economically
+        competitive while maintaining product integrity.
+      </p>
+    </section>
+
+    <!-- Search -->
+    <section class="pb-4 border-b-2 border-dashed">
+      <ProductSearch />
+    </section>
+
+    <!-- Categories -->
+    <section>
+      <ul class="flex flex-wrap mb-24">
+        {
+          industries.map((industry) => {
+            return (
+              <li class="p-8 flex justify-center w-1/2 md:w-1/3 lg:p-16">
+                <figure class="w-full">
+                  <a
+                    href={`/industries/${industry.slug}`}
+                    class="block w-full relative pb-[80%]"
+                  >
+                    <div class="h-full w-full absolute top-0 left-0">
+                      <img
+                        src={industry.image}
+                        alt={industry.name}
+                        class="w-full h-full object-contain"
+                      />
+                    </div>
+                  </a>
+                  <figcaption class="mt-8">
+                    <a
+                      href={`/industries/${industry.slug}`}
+                      class="block text-[#3B71A1] text-center font-bold text-xl"
+                    >
+                      {industry.name}
+                    </a>
+                  </figcaption>
+                </figure>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </section>
+  </section>
+</LayoutCategory>

@@ -1,0 +1,98 @@
+{
+  "title": "Advantage Seal",
+  "message": "Contact Advantage Seal for your fluid sealing requirements.",
+  "socialLinks": [
+    {
+      "name": "Facebook",
+      "href": "https://www.facebook.com/advantagesealph",
+      "type": "facebook",
+      "icon": "uil:facebook-f"
+    },
+    {
+      "name": "Instagram",
+      "href": "https://www.instagram.com/advantageseal/",
+      "type": "instagram",
+      "icon": "mdi:instagram"
+    },
+    {
+      "name": "LinkedIn",
+      "href": "https://www.linkedin.com/company/asiseals",
+      "type": "linkedin",
+      "icon": "mdi:linkedin"
+    },
+    {
+      "name": "Twitter",
+      "href": "https://twitter.com/advantage_seal",
+      "type": "twitter",
+      "icon": "mdi:twitter"
+    },
+    {
+      "name": "YouTube",
+      "href": "https://www.youtube.com/channel/UCc4yzANkm2NeQa7wW6DNOPw",
+      "type": "youtube",
+      "icon": "mdi:youtube"
+    }
+  ],
+  "links": [
+    {
+      "name": "Products",
+      "links": [
+        { "name": "Pump Seals", "href": "/products/pump-seals" },
+        { "name": "Cartridge Seals", "href": "/products/cartridge-seals" },
+        {
+          "name": "Customized Seals",
+          "href": "/products/customized-seals"
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "links": [
+        {
+          "name": "Engineering Design Services",
+          "href": "/services#engineering-design-services"
+        },
+        {
+          "name": "Inventory Management Services",
+          "href": "/services#inventory-management-services"
+        },
+        {
+          "name": "After Sales Services",
+          "href": "/services#after-sales-services"
+        }
+      ]
+    },
+    {
+      "name": "Industries",
+      "links": [
+        { "name": "Automotive", "href": "/industries/automotive" },
+        { "name": "Agriculture", "href": "/industries/agriculture" },
+        {
+          "name": "Food and Beverage",
+          "href": "/industries/food-and-beverage"
+        },
+        { "name": "Pulp and Paper", "href": "/industries/pulp-and-paper" },
+        { "name": "Mining", "href": "/industries/mining" },
+        { "name": "Chemical", "href": "/industries/chemical" },
+        { "name": "Power Generation", "href": "/industries/power-generation" },
+        { "name": "Waste Water", "href": "/industries/waste-water" },
+        {
+          "name": "Pharmaceuticals Industry",
+          "href": "/industries/pharmaceuticals-industry"
+        }
+      ]
+    },
+    {
+      "name": "About",
+      "links": [
+        { "name": "Culture", "href": "/about" },
+        { "name": "Company History", "href": "/about/company-history" },
+        { "name": "Factory Tour", "href": "/about/factory-tour" },
+        { "name": "Resources", "href": "/resources" },
+        { "name": "Company News", "href": "/news/company-news" },
+        { "name": "Blog", "href": "/news/blogs" },
+        { "name": "Contact Us", "href": "/contact-us" }
+      ]
+    }
+  ]
+}

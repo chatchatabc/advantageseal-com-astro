@@ -1,0 +1,127 @@
+---
+import industriesJson from "@data/industries.json";
+import { Icon } from "astro-icon";
+import { Picture } from "astro-imagetools/components";
+---
+
+<industry-section>
+  <!-- Header -->
+  <header
+    class="flex justify-between items-center max-w-7xl mx-auto px-4 lg:px-8"
+  >
+    <h2 class="text-5xl">Industry</h2>
+    <div class="flex items-center divide-x">
+      <button id="industry-prev-btn" class="px-2" aria-label="Previous Button">
+        <Icon
+          name="mdi:chevron-left"
+          class="h-8 w-8 transition hover:text-primary"
+        />
+      </button>
+      <button id="industry-next-btn" class="px-2" aria-label="Next Button">
+        <Icon
+          name="mdi:chevron-right"
+          class="h-8 w-8 transition hover:text-primary"
+        />
+      </button>
+    </div>
+  </header>
+
+  <!-- Container -->
+  <section class="swiper max-w-7xl mx-auto px-4 mt-6">
+    <!-- Carousel -->
+    <swiper-container class="pb-16 swiper-container" loop="true">
+      {
+        industriesJson.contents.map((item) => {
+          return (
+            <swiper-slide class="p-4">
+              <a href={`/industries/${item.slug}`}>
+                <figure class="relative group">
+                  <div class="bg-white w-full py-16 px-8">
+                    <div class="duration-500 relative pb-[75%] group-hover:opacity-0">
+                      <div class="absolute left-0 top-0 w-full h-full">
+                        <Picture
+                          breakpoints={[320]}
+                          src={item.image}
+                          alt={item.name}
+                          objectFit="contain"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <figcaption class="duration-500 absolute w-full h-fit left-0 bottom-0 translate-y-full pointer-events-none group-hover:pointer-events-auto group-hover:bottom-1/2 group-hover:translate-y-1/2">
+                    <p class="text-center duration-500 text-xl tracking-widest px-8 group-hover:tracking-[0.5rem]">
+                      <span class="transition group-hover:text-primary">
+                        {item.name}
+                      </span>
+                    </p>
+                  </figcaption>
+                </figure>
+              </a>
+            </swiper-slide>
+          );
+        })
+      }
+    </swiper-container>
+  </section>
+
+  <!-- Action button -->
+  <a
+    href="/industries"
+    class="block w-fit py-4 px-6 mx-auto text-xl bg-primary transition hover:bg-opacity-80"
+  >
+    View More Industries &gt;
+  </a>
+</industry-section>
+
+<script>
+  class IndustrySection extends HTMLElement {
+    constructor() {
+      super();
+
+      const swiperEl = this.querySelector<any>("swiper-container");
+      const nextBtn = this.querySelector("#industry-next-btn")!;
+      const prevBtn = this.querySelector("#industry-prev-btn")!;
+
+      let autoSlider: any;
+
+      nextBtn.addEventListener("click", () => {
+        swiperEl.swiper.slideNext();
+        resetAutoSlider();
+      });
+
+      prevBtn.addEventListener("click", () => {
+        swiperEl.swiper.slidePrev();
+        resetAutoSlider();
+      });
+
+      // swiper parameters
+      const swiperParams = {
+        slidesPerView: 1,
+        breakpoints: {
+          768: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 4,
+          },
+        },
+      };
+
+      function resetAutoSlider() {
+        if (autoSlider) {
+          clearInterval(autoSlider);
+        }
+        autoSlider = setInterval(() => {
+          swiperEl.swiper.slideNext();
+        }, 5000);
+      }
+
+      resetAutoSlider();
+
+      // now we need to assign all parameters to Swiper element
+      Object.assign(swiperEl, swiperParams);
+    }
+  }
+
+  customElements.define("industry-section", IndustrySection);
+</script>

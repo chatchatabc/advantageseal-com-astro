@@ -1,0 +1,96 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  productSpecs: CollectionEntry<"product-information">[];
+}
+
+const { productSpecs } = Astro.props as Props;
+---
+
+<details-header
+  data-details-header
+  class="sticky top-24 duration-500 bg-white border hidden lg:block"
+>
+  <div class="absolute border border-dashed w-full bottom-4 translate-y-1/2">
+  </div>
+  <ul class="flex">
+    {
+      productSpecs.map((item) => {
+        return (
+          <li data-id={item.data.name} class="flex-1">
+            <button class="px-2 pt-1 pb-2 text-lg block w-full group">
+              <span class="indicator-name text-center font-bold group-hover:text-background">
+                {item.data.name}
+              </span>
+              <div class="indicator-step mx-auto rotate-45 p-1 w-fit rounded-t-full rounded-l-full bg-transparent">
+                <div class="indicator-step-inner mx-auto h-2 w-2 rounded-full" />
+              </div>
+            </button>
+          </li>
+        );
+      })
+    }
+  </ul>
+</details-header>
+
+<script>
+  import { utilTextToUrl } from "src/helpers/commonUtils";
+
+  class DetailsHeader extends HTMLElement {
+    constructor() {
+      super();
+
+      const details = this.querySelectorAll("li");
+      const navbar = document.querySelector<HTMLElement>("[data-navbar]")!;
+      const detailsHeader = document.querySelector<HTMLElement>(
+        "[data-details-header]"
+      )!;
+      detailsHeader.style.top = `${navbar.offsetHeight}px`;
+
+      const navbarHeight = navbar.offsetHeight;
+      const detailsHeaderHeight = detailsHeader.offsetHeight;
+      const totalDisplacement = navbarHeight + detailsHeaderHeight;
+
+      details.forEach((element) => {
+        const dataId = utilTextToUrl(element.dataset.id!);
+        const detail = document.querySelector<HTMLElement>(`#${dataId}`)!;
+
+        const offsetTop = detail.offsetTop;
+        const offsetHeight = detail.offsetHeight;
+        const name = element.querySelector(".indicator-name")!;
+        const button = element.querySelector("button")!;
+        const step = element.querySelector(".indicator-step")!;
+        const stepInner = element.querySelector(".indicator-step-inner")!;
+
+        document.addEventListener("scroll", () => {
+          if (
+            window.scrollY >= offsetTop - totalDisplacement &&
+            window.scrollY < offsetTop + offsetHeight - totalDisplacement
+          ) {
+            step.classList.add("bg-blue-500");
+            step.classList.remove("bg-transparent");
+            stepInner.classList.add("bg-white");
+            stepInner.classList.remove("bg-gray-500");
+            name.classList.add("text-blue-500");
+          } else {
+            step.classList.remove("bg-blue-500");
+            step.classList.add("bg-transparent");
+            stepInner.classList.remove("bg-white");
+            stepInner.classList.add("bg-gray-500");
+            name.classList.remove("text-blue-500");
+          }
+        });
+
+        button.addEventListener("click", () => {
+          window.scrollTo({
+            top: offsetTop - totalDisplacement,
+            behavior: "smooth",
+          });
+        });
+      });
+    }
+  }
+
+  customElements.define("details-header", DetailsHeader);
+</script>

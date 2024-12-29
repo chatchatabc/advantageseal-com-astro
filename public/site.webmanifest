@@ -1,0 +1,21 @@
+{
+  "name": "Advantage Seal Website",
+  "short_name": "Advantage Seal",
+  "description": "Advantage Seal | The Seal of Quality",
+  "icons": [
+    {
+      "src": "/images/logo/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

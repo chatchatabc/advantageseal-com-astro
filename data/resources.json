@@ -1,0 +1,51 @@
+{
+  "pageTitle": "Resources | Advantage Seal",
+  "pageDescription": "Advantage Seal Brochures, Videos, Download, Case Studies, Seal Material, FAQ, Coss-Reference Chart, More Help all in one place. Click one to see more.",
+  "pageKeywords": "Resources, Videos, Case Studies, FAQ",
+  "ogTitle": null,
+  "ogImage": null,
+  "ogType": null,
+  "ogDescription": null,
+  "twitterCardType": null,
+  "twitterTitle": null,
+  "twitterDescription": null,
+  "twitterImage": null,
+  "contents": [
+    {
+      "name": "Brochures",
+      "imageUrl": "/images/resources/brochures.webp",
+      "href": "",
+      "slug": "brochures"
+    },
+    {
+      "name": "Download",
+      "imageUrl": "/images/resources/download.webp",
+      "href": "",
+      "slug": "download"
+    },
+    {
+      "name": "Seal Material Code",
+      "imageUrl": "/images/resources/seal-material-code.webp",
+      "href": "",
+      "slug": "seal-material-code"
+    },
+    {
+      "name": "FAQ",
+      "imageUrl": "/images/resources/faq.webp",
+      "href": "",
+      "slug": "faq"
+    },
+    {
+      "name": "Cross-Reference Chart",
+      "imageUrl": "/images/resources/cross-reference.webp",
+      "href": "",
+      "slug": "cross-reference-chart"
+    },
+    {
+      "name": "More Help",
+      "imageUrl": "/images/resources/help.webp",
+      "href": "/contact-us",
+      "slug": null
+    }
+  ]
+}

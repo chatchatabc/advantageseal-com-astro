@@ -1,0 +1,26 @@
+---
+import NewsList from "@components/news/NewsList.astro";
+import LayoutCategory from "@layouts/LayoutCategory.astro";
+import newsJson from "@data/news.json";
+---
+
+<LayoutCategory
+  image="/images/news/banner.webp"
+  title="News"
+  pageTitle={newsJson.pageTitle}
+  pageDescription={newsJson.pageDescription}
+  pageKeywords={newsJson.pageKeywords}
+  ogTitle={newsJson.ogTitle ?? newsJson.pageTitle}
+  ogDescription={newsJson.ogDescription ?? newsJson.pageDescription}
+  ogImage={newsJson.ogImage}
+  ogType={newsJson.ogType}
+  twitterCardType={newsJson.twitterCardType}
+  twitterTitle={newsJson.twitterTitle}
+  twitterDescription={newsJson.twitterDescription}
+  twitterImage={newsJson.twitterImage}
+>
+  <!-- Container -->
+  <section class="mx-auto max-w-7xl mb-16 px-4 lg:px-8">
+    <NewsList />
+  </section>
+</LayoutCategory>

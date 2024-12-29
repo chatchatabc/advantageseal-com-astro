@@ -1,0 +1,65 @@
+{
+  "contents": [
+    {
+      "name": "USA Headquarters",
+      "address": "694 Veterans Parkway, Unit A, Bolingbrook, IL 60440-3562",
+      "background": "#7A9FBF",
+      "contacts": [
+        {
+          "type": "email",
+          "name": "sales@advantageseal.com",
+          "href": "mailto:sales@advantageseal.com"
+        },
+        {
+          "type": "telephone",
+          "name": "+1 (630) 226-0200",
+          "href": null
+        },
+        {
+          "type": "fax",
+          "name": "+1 (630) 226-0202",
+          "href": null
+        }
+      ]
+    },
+    {
+      "name": "China Headquarters",
+      "address": "655 Qiming Road, Yinzhou District, Ningbo, Zhejiang China 315104",
+      "background": "#A0BBD2",
+      "contacts": [
+        {
+          "type": "telephone",
+          "name": "+86 (574) 8750 0883",
+          "href": null
+        },
+        {
+          "type": "fax",
+          "name": "+86 (574) 8750-2803",
+          "href": null
+        }
+      ]
+    },
+    {
+      "name": "Philippines Office",
+      "address": "Dona P. Ramos St., Fairlane Subd Road, Brgy. Angliongto, Lanang, Davao City, Philippines 8000",
+      "background": "#C6D6E4",
+      "contacts": [
+        {
+          "type": "email",
+          "name": "rmaghari@advantageseal.com",
+          "href": "mailto:rmaghari@advantageseal.com"
+        },
+        {
+          "type": "telephone",
+          "name": "+63 (82) 285 3540",
+          "href": null
+        },
+        {
+          "type": "fax",
+          "name": "+63 (82) 285-7498",
+          "href": null
+        }
+      ]
+    }
+  ]
+}

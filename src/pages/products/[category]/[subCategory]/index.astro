@@ -1,0 +1,76 @@
+---
+import productCategoriesJson from "@data/product-categories.json";
+import LayoutCategory from "@layouts/LayoutCategory.astro";
+import { getCollection } from "astro:content";
+import ProductSearch from "@components/widgets/ProductSearch.astro";
+import type { InferGetStaticPropsType } from "astro";
+import ProductsList from "@components/widgets/ProductsList.svelte";
+
+export async function getStaticPaths() {
+  type StaticPaths = {
+    params: Record<string, string>;
+    props: Record<string, any>;
+  };
+  const subCategories: StaticPaths[] = [];
+
+  productCategoriesJson.contents.forEach((category) => {
+    category.categories.forEach((subCategory) => {
+      subCategories.push({
+        params: { category: category.slug, subCategory: subCategory.slug },
+        props: { subCategory },
+      });
+    });
+  });
+
+  return subCategories;
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { subCategory } = Astro.props as Props;
+
+const collection = await getCollection("product-categories");
+
+const mdFile = collection.find((entry) =>
+  entry.slug.includes(subCategory.slug)
+);
+
+const { Content } = (await mdFile?.render()) ?? {};
+---
+
+<LayoutCategory
+  pageTitle={subCategory.pageTitle ?? subCategory.name}
+  title={subCategory.name}
+  image={"/images/products/banner-inner.webp"}
+  pageDescription={subCategory.pageDescription}
+  pageKeywords={subCategory.pageKeywords}
+  ogImage={subCategory.ogImage ?? subCategory.imageUrl}
+  ogTitle={subCategory.ogTitle ?? subCategory.name ?? subCategory.pageTitle}
+  ogDescription={subCategory.ogDescription ?? subCategory.pageDescription}
+  ogType={subCategory.ogType}
+  twitterCardType={subCategory.twitterCardType}
+  twitterTitle={subCategory.twitterTitle}
+  twitterDescription={subCategory.twitterDescription}
+  twitterImage={subCategory.twitterImage}
+>
+  <!-- Container -->
+  <section class="max-w-7xl mx-auto px-4 lg:px-8">
+    <section class="py-8 border-b-2 border-dashed">
+      <ProductSearch />
+    </section>
+
+    <!-- Sub-category Description -->
+    <section class="py-8 text-xl markdown">
+      {Content && <Content />}
+    </section>
+
+    <!-- Sub-category items -->
+    <section class="mb-8">
+      <ProductsList
+        filterType="sub-category"
+        filterValue={subCategory.slug}
+        client:idle
+      />
+    </section>
+  </section>
+</LayoutCategory>

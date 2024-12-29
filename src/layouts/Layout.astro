@@ -1,0 +1,171 @@
+---
+import NavBar from "@components/nav-bar/NavBar.astro";
+import Footer from "@components/Footer.astro";
+import siteInfoJson from "@data/site-info.json";
+import { SEO } from "astro-seo";
+import "@styles/markdown.scss";
+
+type Props = {
+  title?: string;
+  description?: string;
+  author?: string;
+  keywords?: string;
+  ogTitle?: string;
+  ogType?: string;
+  ogImage?: string;
+  ogDescription?: string;
+  twitterCardType?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
+};
+
+const {
+  title = siteInfoJson.title,
+  description = siteInfoJson.description,
+  author = siteInfoJson.author,
+  keywords = siteInfoJson.keywords,
+  ogTitle = siteInfoJson.ogTitle,
+  ogType = siteInfoJson.ogType,
+  ogImage = siteInfoJson.ogImage,
+  ogDescription = siteInfoJson.ogDescription,
+  twitterCardType = siteInfoJson.twitterCardType,
+  twitterTitle = siteInfoJson.twitterTitle,
+  twitterDescription = siteInfoJson.twitterDescription,
+  twitterImage = siteInfoJson.twitterImage,
+} = Astro.props as Props;
+//do not set defaults on twitter properties except for cardType so that og-image can be used as default. setting default here will prevent that
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Astro SEO -->
+    <SEO
+      title={title}
+      description={description}
+      openGraph={{
+        basic: {
+          title: ogTitle,
+          type: ogType,
+          image: ogImage,
+        },
+        optional: {
+          siteName: title,
+          description: ogDescription,
+        },
+      }}
+      extend={{
+        link: [{ rel: "icon", href: "/favicon.ico" }],
+        meta: [
+          { name: "author", content: author },
+          { name: "keywords", content: keywords },
+          { name: "twitter:card", content: twitterCardType },
+          {
+            name: "twitter:title",
+            content: twitterTitle ?? siteInfoJson.title,
+          },
+          {
+            name: "twitter:description",
+            content: twitterDescription ?? siteInfoJson.description,
+          },
+          {
+            name: "twitter:image",
+            content:
+              siteInfoJson.domain + (twitterImage ?? siteInfoJson.ogImage),
+          },
+        ],
+      }}
+    />
+
+    <!-- Website Icon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/logo/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/logo/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/logo/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Google Fonts Abel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abel&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      type="text/partytown"
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=AW-16746020295"></script>
+    <script type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "AW-16746020295");
+    </script>
+  </head>
+
+  <body class="flex flex-col min-h-screen font-abel">
+    <!-- <div class="flex-1 flex flex-col justify-center items-center">
+      <header>
+        <h1 class="text-5xl">404 - Page Not Found</h1>
+      </header>
+      <section class="mx-auto max-w-4xl">
+        <p class="text-center mt-4 text-lg">
+          Currently, the website is not available at the moment.<br />
+          Please wait and try again next time.
+        </p>
+      </section>
+    </div> -->
+    <NavBar />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  .loader {
+    border: 10px solid #f3f3f3; /* Light grey */
+    border-top: 10px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>

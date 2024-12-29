@@ -1,0 +1,113 @@
+---
+import { Img } from "astro-imagetools/components";
+import { Icon } from "astro-icon";
+
+type Props = {
+  slug?: string;
+  data: Record<string, any>[];
+};
+
+const { data, slug } = Astro.props as Props;
+
+const filteredData = data.filter((entry) => entry.slug !== slug);
+
+while (filteredData.length < 4) {
+  filteredData.push(...filteredData);
+}
+---
+
+<related-products class="flex items-center">
+  <button
+    id="prev-btn"
+    class="rounded-full duration-300 hover:bg-gray-300"
+    aria-label="Previous Button"
+  >
+    <Icon name="mdi:chevron-left" class="w-8 h-8" />
+  </button>
+  <swiper-container class="flex overflow-hidden snap-x">
+    {
+      filteredData.map((entry) => {
+        return (
+          <swiper-slide class="snap-start flex-shrink-0 p-2 w-1/2 md:w-1/3 lg:w-1/4">
+            <a
+              href={`/products/${entry.category}/${entry.subCategory}/${entry.slug}`}
+              class="block"
+            >
+              <figure class="relative">
+                <div>
+                  <Img
+                    breakpoints={[320]}
+                    src={entry.imageUrl}
+                    alt={entry.name}
+                  />
+                </div>
+                <figcaption>
+                  <p class="text-center text-lg">{entry.name}</p>
+                </figcaption>
+              </figure>
+            </a>
+          </swiper-slide>
+        );
+      })
+    }
+  </swiper-container>
+  <button
+    id="next-btn"
+    class="rounded-full duration-300 hover:bg-gray-300"
+    aria-label="Next Button"
+  >
+    <Icon name="mdi:chevron-right" class="w-8 h-8" />
+  </button>
+</related-products>
+
+<script>
+  class RelatedProducts extends HTMLElement {
+    constructor() {
+      super();
+
+      const swiperEl = this.querySelector<any>("swiper-container")!;
+      const prevBtn = this.querySelector<HTMLElement>("#prev-btn")!;
+      const nextBtn = this.querySelector<HTMLElement>("#next-btn")!;
+      let autoSlider: any;
+
+      const swiperParams = {
+        slidesPerView: 2,
+        loop: true,
+        breakpoints: {
+          768: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 4,
+          },
+        },
+      };
+
+      prevBtn.addEventListener("click", () => {
+        swiperEl.swiper.slidePrev();
+        resetAutoSlider();
+      });
+
+      nextBtn.addEventListener("click", () => {
+        swiperEl.swiper.slideNext();
+        resetAutoSlider();
+      });
+
+      function resetAutoSlider() {
+        if (autoSlider) {
+          clearInterval(autoSlider);
+        }
+
+        autoSlider = setInterval(() => {
+          swiperEl.swiper.slideNext();
+        }, 5000);
+      }
+
+      resetAutoSlider();
+
+      Object.assign(swiperEl, swiperParams);
+    }
+  }
+
+  customElements.define("related-products", RelatedProducts);
+</script>

@@ -1,0 +1,45 @@
+{
+  "pageTitle": "News | Advantage Seals",
+  "pageDescription": "News and blogs published by Advantage Seals.",
+  "pageKeywords": "News, Blogs",
+  "ogTitle": null,
+  "ogImage": null,
+  "ogType": null,
+  "ogDescription": null,
+  "twitterCardType": null,
+  "twitterTitle": null,
+  "twitterDescription": null,
+  "twitterImage": null,
+  "contents": [
+    {
+      "name": "Company News",
+      "slug": "company-news",
+      "pageTitle": "Company News | Advantage Seals",
+      "pageDescription": "Company News published by Advantage Seals.",
+      "pageKeywords": null,
+      "ogTitle": null,
+      "ogImage": null,
+      "ogType": null,
+      "ogDescription": null,
+      "twitterCardType": null,
+      "twitterTitle": null,
+      "twitterDescription": null,
+      "twitterImage": null
+    },
+    {
+      "name": "Blogs",
+      "slug": "blogs",
+      "pageTitle": "Blogs | Advantage Seals",
+      "pageDescription": "Blogs published by Advantage Seals.",
+      "pageKeywords": null,
+      "ogTitle": null,
+      "ogImage": null,
+      "ogType": null,
+      "ogDescription": null,
+      "twitterCardType": null,
+      "twitterTitle": null,
+      "twitterDescription": null,
+      "twitterImage": null
+    }
+  ]
+}

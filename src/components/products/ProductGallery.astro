@@ -1,0 +1,106 @@
+---
+import { Img } from "astro-imagetools/components";
+import { Icon } from "astro-icon";
+
+interface Props {
+  images: Record<string, any>[];
+}
+
+const { images } = Astro.props as Props;
+---
+
+<product-gallery class="flex">
+  <ul class="w-2/12 hidden lg:block">
+    {
+      images.map((image, index) => {
+        return (
+          <li class="p-2">
+            <button
+              class={`pagination-image border-black ${
+                index === 0 ? "border" : ""
+              }`}
+            >
+              <Img src={image.url} alt={image.name} />
+            </button>
+          </li>
+        );
+      })
+    }
+  </ul>
+  <div class="w-full relative group lg:w-10/12">
+    <swiper-container>
+      {
+        images.map((image) => {
+          return (
+            <swiper-slide>
+              <div class="w-full mx-auto relative pb-[80%]">
+                <div class="w-full h-full top-0 left-0 absolute">
+                  <Img src={image.url} alt={image.name} />
+                </div>
+              </div>
+            </swiper-slide>
+          );
+        })
+      }
+    </swiper-container>
+    <button
+      aria-label="Previous"
+      data-button-prev
+      class="opacity-0 absolute top-1/2 -translate-y-1/2 z-[1] transition left-0 group-hover:opacity-100"
+    >
+      <Icon class="w-16 h-16 text-primary" name="ic:round-chevron-left" />
+    </button>
+    <button
+      aria-label="Next"
+      data-button-next
+      class="opacity-0 absolute top-1/2 -translate-y-1/2 z-[1] transition right-0 group-hover:opacity-100"
+    >
+      <Icon class="w-16 h-16 text-primary" name="ic:round-chevron-right" />
+    </button>
+  </div>
+</product-gallery>
+
+<script>
+  class ProductGallery extends HTMLElement {
+    constructor() {
+      super();
+
+      const paginationBtns = this.querySelectorAll(".pagination-image");
+      const swiperEl = this.querySelector<any>("swiper-container");
+      const prevBtn = this.querySelector("[data-button-prev]")!;
+      const nextBtn = this.querySelector("[data-button-next]")!;
+
+      prevBtn.addEventListener("click", () => {
+        swiperEl.swiper.slidePrev();
+      });
+
+      nextBtn.addEventListener("click", () => {
+        swiperEl.swiper.slideNext();
+      });
+
+      const swiperParams = {
+        pagination: {
+          clickable: true,
+        },
+      };
+
+      paginationBtns.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+          swiperEl.swiper.slideTo(index);
+        });
+      });
+
+      swiperEl.swiper.on("slideChange", () => {
+        paginationBtns.forEach((btn) => {
+          btn.classList.remove("border");
+        });
+
+        paginationBtns[swiperEl.swiper.activeIndex].classList.add("border");
+      });
+
+      Object.assign(swiperEl, swiperParams);
+    }
+  }
+
+  customElements.define("product-gallery", ProductGallery);
+</script>

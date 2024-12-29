@@ -1,0 +1,79 @@
+---
+import ProductSearch from "@components/widgets/ProductSearch.astro";
+import LayoutCategory from "@layouts/LayoutCategory.astro";
+import productsCategoriesJson from "@data/product-categories.json";
+import productsJson from "@data/products.json";
+import { Img, Picture } from "astro-imagetools/components";
+---
+
+<LayoutCategory
+  image="/images/products/banner-inner.webp"
+  pageTitle={productsJson.pageTitle}
+  pageDescription={productsJson.pageDescription}
+  pageKeywords={productsJson.pageKeywords}
+  ogDescription={productsJson.ogDescription ?? productsJson.pageDescription}
+  ogImage={productsJson.ogImage}
+  ogTitle={productsJson.ogTitle ?? productsJson.pageTitle}
+  ogType={productsJson.ogType}
+  twitterCardType={productsJson.twitterCardType}
+  twitterTitle={productsJson.twitterTitle}
+  twitterDescription={productsJson.twitterDescription}
+  twitterImage={productsJson.twitterImage}
+>
+  <div slot="banner">
+    <div class="w-32 mx-auto">
+      <Picture
+        preload={"webp"}
+        breakpoints={[320]}
+        src="/images/logo/icon.png"
+        alt="icon"
+      />
+    </div>
+    <h1 class="text-4xl text-white text-center italic mt-4">
+      Professional Design. Efficient. Durable
+    </h1>
+  </div>
+  <!-- Search section -->
+  <section class="py-8 max-w-7xl mx-auto px-4 lg:px-8">
+    <ProductSearch />
+  </section>
+
+  <!-- Content Section -->
+  <section class="max-w-7xl mx-auto px-4 lg:px-8">
+    {
+      productsCategoriesJson.contents.map((category) => {
+        return (
+          <section class="py-16 border-t-2 border-dashed">
+            <header>
+              <h2 class="text-5xl">{category.name}</h2>
+            </header>
+
+            <ul class="flex space-x-4 mt-8">
+              {category.categories.map((subCategory) => {
+                return (
+                  <li class="flex-1 max-w-[50%] md:max-w-[33%] lg:max-w-[20%]">
+                    <a href={`/products/${category.slug}/${subCategory.slug}`}>
+                      <figure class="relative group">
+                        <div class="border">
+                          <Img
+                            src={subCategory.imageUrl}
+                            alt={subCategory.name}
+                          />
+                        </div>
+                        <figcaption>
+                          <h2 class="text-lg text-center transition text-[#3B71A1] group-hover:text-[#E14753]">
+                            {subCategory.name}
+                          </h2>
+                        </figcaption>
+                      </figure>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        );
+      })
+    }
+  </section>
+</LayoutCategory>

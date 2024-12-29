@@ -1,0 +1,97 @@
+---
+import LayoutCategory from "@layouts/LayoutCategory.astro";
+import sealMaterialCodeJson from "@data/seal-material-code.json";
+import { getEntryBySlug } from "astro:content";
+import { Img } from "astro-imagetools/components";
+
+const introduction = await getEntryBySlug(
+  "resources",
+  "seal-material-combination-code"
+);
+
+const { Content } = await introduction.render();
+---
+
+<LayoutCategory
+  image="/images/resources/banner.webp"
+  title="Seal Material Code"
+  pageTitle={sealMaterialCodeJson.pageTitle}
+  pageDescription={sealMaterialCodeJson.pageDescription}
+  pageKeywords={sealMaterialCodeJson.pageKeywords}
+  ogTitle={sealMaterialCodeJson.ogTitle ?? sealMaterialCodeJson.pageTitle}
+  ogDescription={sealMaterialCodeJson.ogDescription ??
+    sealMaterialCodeJson.pageDescription}
+  ogImage={sealMaterialCodeJson.ogImage}
+  ogType={sealMaterialCodeJson.ogType}
+  twitterCardType={sealMaterialCodeJson.twitterCardType}
+  twitterTitle={sealMaterialCodeJson.twitterTitle}
+  twitterDescription={sealMaterialCodeJson.twitterDescription}
+  twitterImage={sealMaterialCodeJson.twitterImage}
+>
+  <section class="max-w-7xl mx-auto px-4 lg:px-8">
+    <figure class="flex flex-wrap items-center">
+      <div class="p-8 w-full lg:w-1/2">
+        <Img src={introduction.data.imageUrl} alt={introduction.data.name} />
+      </div>
+      <figcaption class="px-8 w-full lg:w-1/2">
+        <header>
+          <h2 class="px-2 border-l-4 text-3xl font-bold border-primary">
+            {introduction.data.name}
+          </h2>
+        </header>
+        <section class="my-8 list-decimal text-xl markdown">
+          <Content />
+        </section>
+      </figcaption>
+    </figure>
+
+    <section class="pb-8 overflow-x-auto">
+      <table
+        class="w-full text-center min-w-[900px] border-gray-500 border-y border-r"
+      >
+        <thead>
+          <tr class="bg-background text-white text-xl">
+            <th class="p-1 border-l border-gray-500">Seal Assembly</th>
+            <th class="p-1 border-l border-gray-500">Seal Ring</th>
+            <th class="p-1 border-l border-gray-500">Mating Ring</th>
+            <th class="p-1 border-l border-gray-500">Elastomer</th>
+            <th class="p-1 border-l border-gray-500">Metal</th>
+            <th class="p-1 border-l border-gray-500">Rotary/Sub Assembly</th>
+            <th class="p-1 border-l border-gray-500">Seat Assembly</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            sealMaterialCodeJson.contents.map((entry) => {
+              return (
+                <tr class="text-lg">
+                  <td class="p-1 border-l border-t border-gray-500">
+                    {entry.sealAssembly}
+                  </td>
+                  <td class="p-1 border-l border-t border-gray-500">
+                    {entry.matingRing}
+                  </td>
+                  <td class="p-1 border-l border-t border-gray-500">
+                    {entry.elastomer}
+                  </td>
+                  <td class="p-1 border-l border-t border-gray-500">
+                    {entry.metal}
+                  </td>
+                  <td class="p-1 border-l border-t border-gray-500">
+                    {entry.rotary}
+                  </td>
+                  <td class="p-1 border-l border-t border-gray-500">
+                    {entry.sealRing}
+                  </td>
+                  <td class="p-1 border-l border-t border-gray-500">
+                    {entry.seatAssembly}
+                  </td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+    </section>
+  </section>
+</LayoutCategory>

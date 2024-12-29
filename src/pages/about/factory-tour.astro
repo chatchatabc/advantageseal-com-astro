@@ -1,0 +1,24 @@
+---
+import LayoutCategory from "@layouts/LayoutCategory.astro";
+import FactoryTour from "@components/about-us/FactoryTour.svelte";
+import factoryTourJson from "@data/factory-tour.json";
+---
+
+<LayoutCategory
+  image="/images/about-us/banner.webp"
+  title="Factory Tour"
+  pageTitle={factoryTourJson.pageTitle}
+  pageDescription={factoryTourJson.pageDescription}
+  pageKeywords={factoryTourJson.pageKeywords}
+  ogTitle={factoryTourJson.ogTitle ?? factoryTourJson.pageTitle}
+  ogDescription={factoryTourJson.ogDescription ??
+    factoryTourJson.pageDescription}
+  ogImage={factoryTourJson.ogImage}
+  ogType={factoryTourJson.ogType}
+  twitterCardType={factoryTourJson.twitterCardType}
+  twitterTitle={factoryTourJson.twitterTitle}
+  twitterDescription={factoryTourJson.twitterDescription}
+  twitterImage={factoryTourJson.twitterImage}
+>
+  <FactoryTour client:load />
+</LayoutCategory>

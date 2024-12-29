@@ -1,0 +1,84 @@
+---
+import ProductSearch from "@components/widgets/ProductSearch.astro";
+import industriesJson from "@data/industries.json";
+import LayoutCategory from "@layouts/LayoutCategory.astro";
+import ProductsList from "@components/widgets/ProductsList.svelte";
+import type { InferGetStaticPropsType } from "astro";
+import { getEntryBySlug } from "astro:content";
+
+export async function getStaticPaths() {
+  return industriesJson.contents.map((industry) => {
+    return {
+      params: {
+        industry: industry.slug,
+      },
+      props: {
+        industry,
+      },
+    };
+  });
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { industry } = Astro.props as Props;
+
+const industryFile = await getEntryBySlug("industries", industry.slug);
+
+const { Content } = (await industryFile?.render()) ?? {};
+---
+
+<LayoutCategory
+  image="/images/industries/banner.webp"
+  title={industry.name}
+  pageTitle={industry.pageTitle ?? industry.name}
+  pageDescription={industry.pageDescription}
+  pageKeywords={industry.pageKeywords}
+  ogTitle={industry.ogTitle ?? industry.name ?? industry.pageTitle}
+  ogDescription={industry.ogDescription ?? industry.pageDescription}
+  ogImage={industry.ogImage ?? industry.image}
+  ogType={industry.ogType}
+  twitterCardType={industry.twitterCardType}
+  twitterTitle={industry.twitterTitle}
+  twitterDescription={industry.twitterDescription}
+  twitterImage={industry.twitterImage}
+>
+  <!-- Container -->
+  <section class="max-w-7xl mx-auto px-4 lg:px-8">
+    <!-- Sub-category Description -->
+    <figure class="flex flex-wrap">
+      <figcaption class="py-8 w-full md:w-2/3">
+        <header>
+          <h2 class="text-5xl">{industry.name}</h2>
+        </header>
+
+        <section class="text-xl markdown">
+          {Content && <Content />}
+        </section>
+      </figcaption>
+
+      <div class="flex items-center w-full md:w-1/3">
+        <div class="max-w-[75%] h-40 mx-auto">
+          <img
+            src={industry.image}
+            alt={industry.name}
+            class="w-full h-full object-contain"
+          />
+        </div>
+      </div>
+    </figure>
+
+    <section class="py-8 border-b-2 border-dashed">
+      <ProductSearch />
+    </section>
+
+    <!-- Sub-category items -->
+    <section class="my-8">
+      <ProductsList
+        filterType="industry"
+        filterValue={industry.slug}
+        client:idle
+      />
+    </section>
+  </section>
+</LayoutCategory>

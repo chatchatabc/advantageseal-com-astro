@@ -1,0 +1,39 @@
+---
+import NewsList from "@components/news/NewsList.astro";
+import LayoutCategory from "@layouts/LayoutCategory.astro";
+import newsJson from "@data/news.json";
+
+export function getStaticPaths() {
+  const paths = newsJson.contents.map((type) => ({
+    params: { type: type.slug },
+    props: {
+      type,
+    },
+  }));
+
+  return paths;
+}
+
+const { type } = Astro.props;
+---
+
+<LayoutCategory
+  image="/images/news/banner.webp"
+  title={type.name}
+  pageTitle={type.pageTitle ?? type.name}
+  pageDescription={type.pageDescription}
+  pageKeywords={type.pageKeywords}
+  ogTitle={type.ogTitle ?? type.name ?? type.pageTitle}
+  ogDescription={type.ogDescription ?? type.pageDescription}
+  ogImage={type.ogImage}
+  ogType={type.ogType}
+  twitterCardType={type.twitterCardType}
+  twitterTitle={type.twitterTitle}
+  twitterDescription={type.twitterDescription}
+  twitterImage={type.twitterImage}
+>
+  <!-- Container -->
+  <section class="mx-auto max-w-7xl mb-16 px-4 lg:px-8">
+    <NewsList type={type.slug} />
+  </section>
+</LayoutCategory>

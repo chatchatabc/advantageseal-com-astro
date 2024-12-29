@@ -1,0 +1,80 @@
+---
+import { Img } from "astro-imagetools/components";
+import aboutUsJson from "@data/about-us.json";
+import { Icon } from "astro-icon";
+---
+
+<certificate-section class="flex items-center">
+  <button id="prev-btn" aria-label="Previous Button">
+    <Icon class="h-8 w-8" name="mdi:chevron-left" />
+  </button>
+
+  <swiper-container
+    class="snap-x flex-1 py-4 flex font-xl scroll-smooth overflow-hidden"
+  >
+    {
+      aboutUsJson.certificates.map((certificate) => {
+        return (
+          <swiper-slide class="flex-shrink-0 p-2 w-10/12 snap-center md:snap-start md:w-1/3 lg:w-1/5">
+            <figure>
+              <div>
+                <a href={certificate.imageUrl} target="_blank">
+                  <Img
+                    breakpoints={[320]}
+                    src={certificate.imageUrl}
+                    alt={certificate.name}
+                  />
+                </a>
+              </div>
+              <figcaption>
+                <h2 class="text-center">{certificate.name}</h2>
+              </figcaption>
+            </figure>
+          </swiper-slide>
+        );
+      })
+    }
+  </swiper-container>
+
+  <button id="next-btn" aria-label="Next Button">
+    <Icon class="h-8 w-8" name="mdi:chevron-right" />
+  </button>
+</certificate-section>
+
+<script>
+  class CertificateSection extends HTMLElement {
+    constructor() {
+      super();
+
+      const swiperEl = this.querySelector<any>("swiper-container")!;
+      const prevBtn = this.querySelector("#prev-btn")!;
+      const nextBtn = this.querySelector("#next-btn")!;
+
+      prevBtn.addEventListener("click", () => {
+        swiperEl.swiper.slidePrev();
+      });
+
+      nextBtn.addEventListener("click", () => {
+        swiperEl.swiper.slideNext();
+      });
+
+      const swiperParams = {
+        slidesPerView: 1,
+        pagination: true,
+        freeMode: true,
+        breakpoints: {
+          768: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 5,
+          },
+        },
+      };
+
+      Object.assign(swiperEl, swiperParams);
+    }
+  }
+
+  customElements.define("certificate-section", CertificateSection);
+</script>

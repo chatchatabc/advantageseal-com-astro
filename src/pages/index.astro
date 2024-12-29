@@ -1,0 +1,190 @@
+---
+import CompanyHistory from "@components/landing-page/CompanyHistory.astro";
+import HeroSection from "@components/landing-page/HeroSection.astro";
+import IndustrySection from "@components/landing-page/IndustrySection.astro";
+import industriesJson from "@data/industries.json";
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import { Picture } from "astro-imagetools/components";
+
+const newsCollection = await getCollection("news");
+// const newsCollection = newsCollection.filter((item) => item.data.draft === false);
+const companyNews = newsCollection.filter(
+  (item) => item.data.type === "company-news"
+);
+const blog = newsCollection.filter((item) => item.data.type === "blogs");
+---
+
+<Layout>
+  <!-- Hero Section -->
+  <HeroSection />
+
+  <!-- Advantage Seal -->
+  <section class="max-w-7xl mx-auto px-4 lg:px-8">
+    <!-- Section Header -->
+    <header class="pb-24 md:pb-40 lg:pb-56">
+      <h1 class="text-center text-primary text-3xl md:text-4xl lg:text-5xl">
+        <span class="relative inline-block translate-x-[5%]">
+          <span class="bg-[#DCECF9] absolute w-full h-4 left-0 -bottom-1 z-[-1]"
+          ></span>
+          <span class="px-4">Advantage Seal</span>
+        </span>
+        <span
+          class="relative inline-block -translate-x-[5%] translate-y-1/2 md:translate-y-[150%]"
+        >
+          <span class="bg-[#DCECF9] absolute w-full h-4 left-0 -bottom-1 z-[-1]"
+          ></span>
+          <span class="px-4">The Seal of Quality</span>
+        </span>
+      </h1>
+    </header>
+
+    <!-- Content Section -->
+    <section class="text-xl">
+      <figure class="flex flex-wrap flex-row-reverse items-center">
+        <div class="w-full md:px-16 md:w-7/12">
+          <div class="pb-[56.16%] relative">
+            <iframe
+              title="Advantage Seal Video"
+              class="absolute w-full h-full top-0 left-0"
+              src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fadvantagesealph%2Fvideos%2F3282931381960999%2F&show_text=false&width=560&t=0"
+              style="border:none;overflow:hidden"
+              allowfullscreen="true"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+            ></iframe>
+          </div>
+        </div>
+        <figcaption class="w-full mt-8 md:w-5/12">
+          <p>
+            Advantage Seal can develop and manufacture custom mechanical seals
+            depending on our customers' specific needs. Quality, service, and
+            delivery are all areas in which we aim to exceed our clients'
+            expectations consistently.
+          </p>
+          <a
+            href="/products"
+            class="px-6 inline-block py-2 mt-12 text-white bg-primary transition hover:bg-background"
+          >
+            View our seal line &gt;
+          </a>
+        </figcaption>
+      </figure>
+    </section>
+  </section>
+
+  <!-- Industry Section Mobile -->
+  <section class="mt-24 text-white bg-[#4176A4] py-16">
+    <IndustrySection />
+    <section class="mt-16 max-w-7xl mx-auto px-4 md:hidden">
+      <header>
+        <h2 class="text-5xl">Industry</h2>
+      </header>
+      <ul class="space-y-2 py-4 pl-4 list-disc">
+        {
+          industriesJson.contents.map((industry) => {
+            return <li class="text-lg">{industry.name}</li>;
+          })
+        }
+      </ul>
+
+      <!-- Action button -->
+      <a
+        href="/industries"
+        class="block w-fit py-4 px-6 mx-auto text-xl bg-primary transition hover:bg-opacity-80"
+      >
+        View More Industries &gt;
+      </a>
+
+      <div class="w-1/2">
+        <Picture src="/images/arrow.webp" alt="arrow" />
+      </div>
+    </section>
+  </section>
+
+  <!-- Company History -->
+  <section class="bg-[#DCECF9] py-16">
+    <CompanyHistory />
+  </section>
+
+  <!-- News Section -->
+  <section class="max-w-7xl mx-auto py-8 px-4 md:py-16 lg:px-8">
+    <header class="flex items-center justify-between">
+      <h2 class="text-5xl">Recent News</h2>
+      <a
+        href="/news"
+        class="inline-block text-xl px-4 py-2 bg-primary text-onPrimary transition hover:bg-background"
+      >
+        View more
+      </a>
+    </header>
+    <section class="flex flex-wrap md:pt-8">
+      <!-- Blogs Section -->
+      <section class="w-full py-4 md:w-1/2">
+        <header>
+          <h3 class="text-2xl">Blog</h3>
+        </header>
+        {
+          blog[0] ? (
+            <article>
+              <header>
+                <h4 class="pt-2 text-4xl text-background">
+                  <a href={`/news/${blog[0].data.type}/${blog[0].slug}`}>
+                    {blog[0].data.name}
+                  </a>
+                </h4>
+              </header>
+              <p class="text-lg text-gray-500">{blog[0].data.summary}</p>
+              <footer>
+                <p class="mt-4 text-lg text-background font-bold">
+                  <time datetime={blog[0].data.date.toISOString()}>
+                    {new Intl.DateTimeFormat().format(blog[0].data.date)}
+                  </time>
+                </p>
+              </footer>
+            </article>
+          ) : (
+            <p>No Blogs</p>
+          )
+        }
+      </section>
+
+      <!-- Company News section -->
+      <section class="w-full py-4 md:w-1/2">
+        <header>
+          <h3 class="text-2xl">Company News</h3>
+        </header>
+        {
+          companyNews[0] ? (
+            <article>
+              <header>
+                <h4 class="pt-2 text-4xl text-background">
+                  <a
+                    href={`/news/${companyNews[0].data.type}/${companyNews[0].slug}`}
+                  >
+                    {companyNews[0].data.name}
+                  </a>
+                </h4>
+              </header>
+              <p class="text-lg text-gray-500">{companyNews[0].data.summary}</p>
+              <footer>
+                <p class="mt-4 text-lg text-background font-bold">
+                  <time datetime={companyNews[0].data.date.toISOString()}>
+                    {new Intl.DateTimeFormat().format(companyNews[0].data.date)}
+                  </time>
+                </p>
+              </footer>
+            </article>
+          ) : (
+            <p>No Blogs</p>
+          )
+        }
+      </section>
+    </section>
+  </section>
+</Layout>
+
+<!-- SwiperJS -->
+<script>
+  import { register } from "swiper/element/bundle";
+  register();
+</script>
