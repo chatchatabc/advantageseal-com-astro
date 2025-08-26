@@ -16,7 +16,7 @@ import {Img} from "astro-imagetools/components";
                 <div class="flex flex-wrap justify-center items-center mb-8 gap-4 md:gap-8">
                     <img src="/images/event/weftec-logo-v2.png"
                          alt="WEFTEC, the Water Environment Federation's Technical Exhibition and Conference"
-                         class="h-12"/>
+                         class="h-16"/>
                     <div class="text-center">
                         <div class="text-red-500 text-4xl font-bold">27</div>
                         <div class="text-blue-600 text-sm font-semibold">SEPT</div>
@@ -33,11 +33,7 @@ import {Img} from "astro-imagetools/components";
                         <div class="text-blue-600 text-sm font-semibold">OCT</div>
                     </div>
                     <div class="flex items-center">
-                        <img src="/images/logo/logo.png" alt="Advantage Seal Logo" class="h-12"/>
-                        <div class="ml-2 text-sm text-gray-600">
-                            <div>Advantage Seal</div>
-                            <div class="italic">The Seal of Quality</div>
-                        </div>
+                        <img src="/images/logo/logo.png" alt="Advantage Seal Logo" class="h-20"/>
                     </div>
                 </div>
 
@@ -57,44 +53,53 @@ import {Img} from "astro-imagetools/components";
                 <!-- Three Cards Section -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Event Details Card -->
-                    <div class="bg-white rounded-lg shadow-lg p-8 text-center border" id="event-details">
+                    <div class="bg-white rounded-lg shadow-lg p-8 text-center border">
                         <h3 class="text-2xl font-bold text-blue-600 mb-4">EVENT DETAILS</h3>
                         <p class="text-gray-700 mb-4">
                             Meet our Team, Check where you can find us.
                         </p>
                         <div class="flex justify-center">
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M19 9l-7 7-7-7"></path>
-                            </svg>
+                            <a href="#event-details">
+                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor"
+                                     viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </a>
                         </div>
                     </div>
 
                     <!-- Why Visit Us Card -->
-                    <div class="bg-white rounded-lg shadow-lg p-8 text-center border" id="visit-us">
+                    <div class="bg-white rounded-lg shadow-lg p-8 text-center border">
                         <h3 class="text-2xl font-bold text-blue-600 mb-4">WHY VISIT US?</h3>
                         <p class="text-gray-700 mb-4">
                             Get a first look at our newest sealing innovations and connect with us.
                         </p>
                         <div class="flex justify-center">
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M19 9l-7 7-7-7"></path>
-                            </svg>
+                            <a href="#visit-us">
+                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor"
+                                     viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </a>
                         </div>
                     </div>
 
                     <!-- Show Specials Card -->
-                    <div class="bg-white rounded-lg shadow-lg p-8 text-center border" id="show-specials">
+                    <div class="bg-white rounded-lg shadow-lg p-8 text-center border">
                         <h3 class="text-2xl font-bold text-blue-600 mb-4">SHOW SPECIALS</h3>
                         <p class="text-gray-700 mb-4">
                             Join our exclusive raffle and grab event-only giveaways.
                         </p>
                         <div class="flex justify-center">
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M19 9l-7 7-7-7"></path>
-                            </svg>
+                            <a href="#show-specials">
+                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor"
+                                     viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -104,11 +109,11 @@ import {Img} from "astro-imagetools/components";
 
     <!-- Event Details Section -->
     <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8" id="event-details">
             <div class="flex flex-wrap items-center mb-16">
                 <div class="w-full lg:w-1/2 mb-8 lg:mb-0">
                     <h2 class="text-4xl font-bold text-blue-600 mb-6">EVENT DETAILS</h2>
-                    <img
+                    <Img
                             src="/images/event/event-details.jpg"
                             alt="WEFTEC 2025 Event Floor"
                             class="rounded-lg shadow-lg w-full"
@@ -130,11 +135,11 @@ import {Img} from "astro-imagetools/components";
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8" id="visit-us">
             <div class="flex flex-wrap items-center mb-16">
                 <div class="w-full lg:w-1/2 mb-8 lg:mb-0">
                     <h2 class="text-4xl font-bold text-blue-600 mb-6">WHY VISIT US?</h2>
-                    <img
+                    <Img
                             src="/images/event/why-visit-us.jpg"
                             alt="WEFTEC 2025 Event Floor"
                             class="rounded-lg shadow-lg w-full"
@@ -153,11 +158,11 @@ import {Img} from "astro-imagetools/components";
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8" id="show-specials">
             <div class="flex flex-wrap items-center mb-16">
                 <div class="w-full lg:w-1/2 mb-8 lg:mb-0">
                     <h2 class="text-4xl font-bold text-blue-600 mb-6">SHOW SPECIALS</h2>
-                    <img
+                    <Img
                             src="/images/event/show-specials.png"
                             alt="WEFTEC 2025 Event"
                             class="rounded-lg shadow-lg w-full"
