@@ -1,7 +1,7 @@
 {
   "contents": [
     {
-      "name": "USA Headquarters",
+      "name": "USA Headquarter",
       "address": "694 Veterans Parkway, Unit A, Bolingbrook, IL 60440-3562",
       "background": "#7A9FBF",
       "contacts": [
@@ -23,8 +23,8 @@
       ]
     },
     {
-      "name": "China Headquarters",
-      "address": "655 Qiming Road, Yinzhou District, Ningbo, Zhejiang China 315104",
+      "name": "China Headquarter",
+      "address": "655 Qiming Road, Yinzhou District, Ningbo, Zhejiang China 315105",
       "background": "#A0BBD2",
       "contacts": [
         {
@@ -57,6 +57,23 @@
         {
           "type": "fax",
           "name": "+63 (82) 285-7498",
+          "href": null
+        }
+      ]
+    },
+    {
+      "name": "Malaysia Office",
+      "address": "No 1028 Jalan Teratai 36/14 Indahpura 08100 Kulai Johor, Malaysia",
+      "background": "#C6D6E4",
+      "contacts": [
+        {
+          "type": "email",
+          "name": "river@advantageseal.com",
+          "href": "mailto:river@advantageseal.com"
+        },
+        {
+          "type": "telephone",
+          "name": "+60 (1728) 12158",
           "href": null
         }
       ]
